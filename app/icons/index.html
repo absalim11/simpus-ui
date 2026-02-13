@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Documentation - Simpus UI</title>
+
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="../../styles/macos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --doc-bg: #f5f5f7;
+            --doc-card-bg: #ffffff;
+            --doc-text: #1d1d1f;
+            --doc-border: #d2d2d7;
+        }
+
+        [data-theme="dark"] {
+            --doc-bg: #1e1e1e;
+            --doc-card-bg: #2c2c2e;
+            --doc-text: #f5f5f7;
+            --doc-border: #424245;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--doc-bg);
+            color: var(--doc-text);
+            margin: 0;
+            padding: 40px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: var(--simpus-text-secondary);
+            font-size: 18px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--doc-border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 20px;
+        }
+
+        .icon-card {
+            background: var(--doc-card-bg);
+            border: 1px solid var(--doc-border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .icon-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-card i {
+            font-size: 32px;
+            color: var(--simpus-accent-primary);
+        }
+
+        .icon-card .icon-name {
+            font-size: 13px;
+            color: var(--simpus-text-secondary);
+            text-align: center;
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 4px 8px;
+            border-radius: 4px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        [data-theme="dark"] .icon-card .icon-name {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .copy-feedback {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--simpus-accent-success);
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .icon-card.copied .copy-feedback {
+            opacity: 1;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button class="simpus-btn simpus-btn-secondary theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+        <i class="bi bi-moon-stars"></i>
+    </button>
+
+    <div class="header">
+        <h1>Icon System</h1>
+        <p>Managed healthcare icon set using Bootstrap Icons</p>
+    </div>
+
+    <div class="container">
+        <!-- Healthcare Icons -->
+        <h2 class="section-title">
+            <i class="bi bi-hospital" style="color: var(--simpus-accent-red);"></i>
+            Healthcare & Medical
+        </h2>
+        <div class="icon-grid">
+            <!-- Medical / Hospital -->
+            <div class="icon-card" onclick="copyIcon(this, 'bi-hospital')">
+                <i class="bi bi-hospital"></i>
+                <span class="icon-name">bi-hospital</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-prescription2')">
+                <i class="bi bi-prescription2"></i>
+                <span class="icon-name">bi-prescription2</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-capsule')">
+                <i class="bi bi-capsule"></i>
+                <span class="icon-name">bi-capsule</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-thermometer-half')">
+                <i class="bi bi-thermometer-half"></i>
+                <span class="icon-name">bi-thermometer...</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-heart-pulse')">
+                <i class="bi bi-heart-pulse"></i>
+                <span class="icon-name">bi-heart-pulse</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-activity')">
+                <i class="bi bi-activity"></i>
+                <span class="icon-name">bi-activity</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-lungs')">
+                <i class="bi bi-lungs"></i>
+                <span class="icon-name">bi-lungs</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-virus')">
+                <i class="bi bi-virus"></i>
+                <span class="icon-name">bi-virus</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-bandaid')">
+                <i class="bi bi-bandaid"></i>
+                <span class="icon-name">bi-bandaid</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-person-wheelchair')">
+                <i class="bi bi-person-wheelchair"></i>
+                <span class="icon-name">bi-person-wh...</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+
+            <!-- People / Roles -->
+            <div class="icon-card" onclick="copyIcon(this, 'bi-person-badge')">
+                <i class="bi bi-person-badge"></i>
+                <span class="icon-name">bi-person-badge</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-person-heart')">
+                <i class="bi bi-person-heart"></i>
+                <span class="icon-name">bi-person-heart</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+        </div>
+
+        <!-- System & Interface Icons -->
+        <h2 class="section-title">
+            <i class="bi bi-grid" style="color: var(--simpus-accent-blue);"></i>
+            System & Interface
+        </h2>
+        <div class="icon-grid">
+            <div class="icon-card" onclick="copyIcon(this, 'bi-house')">
+                <i class="bi bi-house"></i>
+                <span class="icon-name">bi-house</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-gear')">
+                <i class="bi bi-gear"></i>
+                <span class="icon-name">bi-gear</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-bell')">
+                <i class="bi bi-bell"></i>
+                <span class="icon-name">bi-bell</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-search')">
+                <i class="bi bi-search"></i>
+                <span class="icon-name">bi-search</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-calendar3')">
+                <i class="bi bi-calendar3"></i>
+                <span class="icon-name">bi-calendar3</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-folder2-open')">
+                <i class="bi bi-folder2-open"></i>
+                <span class="icon-name">bi-folder...</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-trash')">
+                <i class="bi bi-trash"></i>
+                <span class="icon-name">bi-trash</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+            <div class="icon-card" onclick="copyIcon(this, 'bi-x-lg')">
+                <i class="bi bi-x-lg"></i>
+                <span class="icon-name">bi-x-lg</span>
+                <span class="copy-feedback">Copied!</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../core/jquery-3.7.1.min.js"></script>
+    <script>
+        // Init logic
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+        }
+
+        function copyIcon(card, className) {
+            const code = `<i class="bi ${className}"></i>`;
+            navigator.clipboard.writeText(code).then(() => {
+                card.classList.add('copied');
+                setTimeout(() => card.classList.remove('copied'), 1500);
+            });
+        }
+    </script>
+</body>
+
+</html>

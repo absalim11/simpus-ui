@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>macOS Web Desktop</title>
+
+    <!-- Bootstrap 4.6 (Loaded BEFORE custom CSS) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Core Libraries -->
+    <script src="core/jquery-3.7.1.min.js"></script>
+    <script src="core/jqrouter-4.6.1.min.js"></script>
+    <script src="core/vue.js"></script>
+
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/simpus.css">
+
+    <!-- Routing -->
+    <script src="core/routing.js"></script>
+
+    <!-- Custom JS (Global Functions) -->
+    <script src="core/simpus.js"></script>
+
+    <style>
+        /* Ensure app container takes full height */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            /* Prevent body scroll, handle inside app if needed */
+        }
+
+        .my-app {
+            height: 100%;
+            width: 100%;
+            background-image: url('img/blue-abstract.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="my-app"></div>
+
+    <!-- Bootstrap JS (Optional, if components need it) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

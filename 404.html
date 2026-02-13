@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Simpus UI</title>
+
+    <!-- Bootstrap 4.6 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/simpus.css">
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('img/blue-abstract.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .error-window {
+            width: 400px;
+            max-width: 90%;
+            background: var(--simpus-window-bg);
+            backdrop-filter: blur(var(--simpus-glass-blur)) saturate(var(--simpus-glass-saturation));
+            border-radius: var(--simpus-window-radius);
+            box-shadow: var(--simpus-window-shadow);
+            border: 1px solid var(--simpus-window-border);
+            text-align: center;
+            padding-bottom: 20px;
+            animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .error-icon {
+            font-size: 64px;
+            color: var(--simpus-accent-red);
+            margin: 20px 0 10px;
+        }
+
+        .error-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--simpus-text-primary);
+        }
+
+        .error-message {
+            color: var(--simpus-text-secondary);
+            margin-bottom: 24px;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-window">
+        <div class="simpus-window-titlebar">
+            <div class="simpus-window-traffic-lights">
+                <span class="simpus-traffic-light close"></span>
+                <span class="simpus-traffic-light minimize"></span>
+                <span class="simpus-traffic-light maximize"></span>
+            </div>
+            <span class="simpus-window-title">System Error</span>
+        </div>
+
+        <div class="error-icon">
+            <i class="bi bi-exclamation-circle-fill"></i>
+        </div>
+        <div class="error-title">404 Not Found</div>
+        <div class="error-message">
+            The file or resource you are looking for could not be found. It may have been moved, deleted, or never
+            existed.
+        </div>
+
+        <button class="simpus-btn simpus-btn-primary" onclick="window.location.href='/index.html'">
+            Return to Desktop
+        </button>
+    </div>
+
+    <script>
+        // Init theme
+        const savedTheme = localStorage.getItem('simpus-theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+    </script>
+</body>
+
+</html>
