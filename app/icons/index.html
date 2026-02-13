@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Icon Documentation - Simpus UI</title>
 
-    <!-- CSS Dependencies -->
-    <link rel="stylesheet" href="../../styles/macos.css">
+    <link rel="stylesheet" href="../../styles/simpus.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
@@ -26,95 +25,132 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--doc-bg);
             color: var(--doc-text);
             margin: 0;
-            padding: 40px;
+            padding: 24px 40px;
             transition: background 0.3s, color 0.3s;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
         .header h1 {
-            font-size: 32px;
-            font-weight: 600;
-            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 6px;
         }
 
         .header p {
             color: var(--simpus-text-secondary);
-            font-size: 18px;
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .search-bar {
+            max-width: 400px;
+            margin: 0 auto 32px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            height: 36px;
+            padding: 0 12px 0 36px;
+            border: 1px solid var(--doc-border);
+            border-radius: 8px;
+            background: var(--doc-card-bg);
+            color: var(--doc-text);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--simpus-accent-primary);
+        }
+
+        .search-bar .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--simpus-text-tertiary);
+            font-size: 16px;
         }
 
         .section-title {
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 600;
-            margin: 40px 0 20px;
-            padding-bottom: 10px;
+            margin: 32px 0 16px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--doc-border);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+        }
+
+        .section-title i {
+            font-size: 20px;
         }
 
         .icon-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
         }
 
         .icon-card {
             background: var(--doc-card-bg);
             border: 1px solid var(--doc-border);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 16px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
+            transition: transform 0.15s, box-shadow 0.15s;
         }
 
         .icon-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
         .icon-card i {
-            font-size: 32px;
+            font-size: 28px;
             color: var(--simpus-accent-primary);
         }
 
         .icon-card .icon-name {
-            font-size: 13px;
+            font-size: 11px;
             color: var(--simpus-text-secondary);
             text-align: center;
-            font-family: monospace;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 4px 8px;
+            font-family: 'SF Mono', monospace;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 3px 6px;
             border-radius: 4px;
             width: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         [data-theme="dark"] .icon-card .icon-name {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .copy-feedback {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--simpus-accent-success);
+            top: 6px;
+            right: 6px;
+            background: var(--simpus-accent-primary);
             color: white;
-            font-size: 10px;
+            font-size: 9px;
             padding: 2px 6px;
             border-radius: 4px;
             opacity: 0;
@@ -125,172 +161,426 @@
             opacity: 1;
         }
 
+        .icon-card.hidden {
+            display: none;
+        }
+
         .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            padding: 0;
+            border: 1px solid var(--doc-border);
+            background: var(--doc-card-bg);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .badge-count {
+            font-size: 12px;
+            color: var(--simpus-text-tertiary);
+            font-weight: 400;
         }
     </style>
 </head>
 
 <body>
 
-    <button class="simpus-btn simpus-btn-secondary theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
         <i class="bi bi-moon-stars"></i>
     </button>
 
     <div class="header">
-        <h1>Icon System</h1>
-        <p>Managed healthcare icon set using Bootstrap Icons</p>
+        <h1>🎨 Simpus OS Icon System</h1>
+        <p>Bootstrap Icons v1.11.3 — Click any icon to copy HTML</p>
     </div>
 
-    <div class="container">
-        <!-- Healthcare Icons -->
+    <div class="search-bar">
+        <i class="bi bi-search search-icon"></i>
+        <input type="text" id="iconSearch" placeholder="Search icons..." oninput="filterIcons(this.value)">
+    </div>
+
+    <div class="container" id="iconContainer">
+
+        <!-- ===== HEALTHCARE & MEDICAL ===== -->
         <h2 class="section-title">
             <i class="bi bi-hospital" style="color: var(--simpus-accent-red);"></i>
             Healthcare & Medical
         </h2>
-        <div class="icon-grid">
-            <!-- Medical / Hospital -->
-            <div class="icon-card" onclick="copyIcon(this, 'bi-hospital')">
-                <i class="bi bi-hospital"></i>
-                <span class="icon-name">bi-hospital</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-prescription2')">
-                <i class="bi bi-prescription2"></i>
-                <span class="icon-name">bi-prescription2</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-capsule')">
-                <i class="bi bi-capsule"></i>
-                <span class="icon-name">bi-capsule</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-thermometer-half')">
-                <i class="bi bi-thermometer-half"></i>
-                <span class="icon-name">bi-thermometer...</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-heart-pulse')">
-                <i class="bi bi-heart-pulse"></i>
-                <span class="icon-name">bi-heart-pulse</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-activity')">
-                <i class="bi bi-activity"></i>
-                <span class="icon-name">bi-activity</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-lungs')">
-                <i class="bi bi-lungs"></i>
-                <span class="icon-name">bi-lungs</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-virus')">
-                <i class="bi bi-virus"></i>
-                <span class="icon-name">bi-virus</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-bandaid')">
-                <i class="bi bi-bandaid"></i>
-                <span class="icon-name">bi-bandaid</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-person-wheelchair')">
-                <i class="bi bi-person-wheelchair"></i>
-                <span class="icon-name">bi-person-wh...</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
+        <div class="icon-grid" id="grid-healthcare"></div>
 
-            <!-- People / Roles -->
-            <div class="icon-card" onclick="copyIcon(this, 'bi-person-badge')">
-                <i class="bi bi-person-badge"></i>
-                <span class="icon-name">bi-person-badge</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-person-heart')">
-                <i class="bi bi-person-heart"></i>
-                <span class="icon-name">bi-person-heart</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-        </div>
-
-        <!-- System & Interface Icons -->
+        <!-- ===== PEOPLE & USERS ===== -->
         <h2 class="section-title">
-            <i class="bi bi-grid" style="color: var(--simpus-accent-blue);"></i>
+            <i class="bi bi-people" style="color: var(--simpus-accent-secondary);"></i>
+            People & Users
+        </h2>
+        <div class="icon-grid" id="grid-people"></div>
+
+        <!-- ===== NAVIGATION & ARROWS ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-signpost-2" style="color: var(--simpus-accent-primary);"></i>
+            Navigation & Arrows
+        </h2>
+        <div class="icon-grid" id="grid-navigation"></div>
+
+        <!-- ===== FILES & DOCUMENTS ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-file-earmark-text" style="color: var(--simpus-accent-yellow);"></i>
+            Files & Documents
+        </h2>
+        <div class="icon-grid" id="grid-files"></div>
+
+        <!-- ===== COMMUNICATION ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-chat-dots" style="color: var(--simpus-accent-secondary);"></i>
+            Communication
+        </h2>
+        <div class="icon-grid" id="grid-communication"></div>
+
+        <!-- ===== SYSTEM & INTERFACE ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-gear" style="color: var(--simpus-text-secondary);"></i>
             System & Interface
         </h2>
-        <div class="icon-grid">
-            <div class="icon-card" onclick="copyIcon(this, 'bi-house')">
-                <i class="bi bi-house"></i>
-                <span class="icon-name">bi-house</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-gear')">
-                <i class="bi bi-gear"></i>
-                <span class="icon-name">bi-gear</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-bell')">
-                <i class="bi bi-bell"></i>
-                <span class="icon-name">bi-bell</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-search')">
-                <i class="bi bi-search"></i>
-                <span class="icon-name">bi-search</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-calendar3')">
-                <i class="bi bi-calendar3"></i>
-                <span class="icon-name">bi-calendar3</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-folder2-open')">
-                <i class="bi bi-folder2-open"></i>
-                <span class="icon-name">bi-folder...</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-trash')">
-                <i class="bi bi-trash"></i>
-                <span class="icon-name">bi-trash</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-            <div class="icon-card" onclick="copyIcon(this, 'bi-x-lg')">
-                <i class="bi bi-x-lg"></i>
-                <span class="icon-name">bi-x-lg</span>
-                <span class="copy-feedback">Copied!</span>
-            </div>
-        </div>
+        <div class="icon-grid" id="grid-system"></div>
+
+        <!-- ===== DATA & CHARTS ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-bar-chart-line" style="color: var(--simpus-accent-primary);"></i>
+            Data & Charts
+        </h2>
+        <div class="icon-grid" id="grid-data"></div>
+
+        <!-- ===== COMMERCE & FINANCE ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-wallet2" style="color: var(--simpus-accent-yellow);"></i>
+            Commerce & Finance
+        </h2>
+        <div class="icon-grid" id="grid-commerce"></div>
+
+        <!-- ===== MEDIA & CONTENT ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-play-circle" style="color: var(--simpus-accent-red);"></i>
+            Media & Content
+        </h2>
+        <div class="icon-grid" id="grid-media"></div>
+
+        <!-- ===== STATUS & ALERTS ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-exclamation-triangle" style="color: var(--simpus-accent-yellow);"></i>
+            Status & Alerts
+        </h2>
+        <div class="icon-grid" id="grid-status"></div>
+
+        <!-- ===== DEVICES & HARDWARE ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-laptop" style="color: var(--simpus-text-primary);"></i>
+            Devices & Hardware
+        </h2>
+        <div class="icon-grid" id="grid-devices"></div>
+
+        <!-- ===== SECURITY & AUTH ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-shield-lock" style="color: var(--simpus-accent-primary);"></i>
+            Security & Authentication
+        </h2>
+        <div class="icon-grid" id="grid-security"></div>
+
+        <!-- ===== LAYOUT & EDITING ===== -->
+        <h2 class="section-title">
+            <i class="bi bi-layout-text-window" style="color: var(--simpus-accent-secondary);"></i>
+            Layout & Editing
+        </h2>
+        <div class="icon-grid" id="grid-layout"></div>
+
     </div>
 
-    <!-- Scripts -->
-    <script src="../../core/jquery-3.7.1.min.js"></script>
     <script>
-        // Init logic
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
+        // ===== ICON DATA =====
+        const iconData = {
+            healthcare: [
+                'hospital', 'hospital-fill', 'prescription2', 'capsule', 'capsule-pill',
+                'thermometer-half', 'heart-pulse', 'heart-pulse-fill', 'activity',
+                'lungs', 'lungs-fill', 'virus', 'virus2', 'bandaid', 'bandaid-fill',
+                'person-wheelchair', 'clipboard2-pulse', 'clipboard2-pulse-fill',
+                'eye', 'eye-fill', 'eye-slash', 'eye-slash-fill',
+                'droplet', 'droplet-fill', 'moisture',
+                'heart', 'heart-fill', 'heartbreak', 'heartbreak-fill',
+                'gender-male', 'gender-female', 'gender-ambiguous',
+                'clipboard-data', 'clipboard-data-fill',
+                'clipboard-check', 'clipboard-check-fill',
+                'file-medical', 'file-medical-fill',
+                'body-text', 'ear', 'ear-fill'
+            ],
+            people: [
+                'person', 'person-fill', 'person-circle', 'person-check', 'person-check-fill',
+                'person-plus', 'person-plus-fill', 'person-dash', 'person-dash-fill',
+                'person-x', 'person-x-fill', 'person-badge', 'person-badge-fill',
+                'person-heart', 'person-hearts', 'person-lines-fill',
+                'person-workspace', 'person-vcard', 'person-vcard-fill',
+                'person-gear', 'person-lock', 'person-rolodex',
+                'people', 'people-fill', 'person-standing',
+                'person-raised-hand', 'person-arms-up',
+                'person-bounding-box', 'person-video', 'person-video2',
+                'universal-access', 'universal-access-circle'
+            ],
+            navigation: [
+                'arrow-left', 'arrow-right', 'arrow-up', 'arrow-down',
+                'arrow-left-circle', 'arrow-right-circle', 'arrow-up-circle', 'arrow-down-circle',
+                'arrow-left-circle-fill', 'arrow-right-circle-fill',
+                'arrow-bar-left', 'arrow-bar-right', 'arrow-bar-up', 'arrow-bar-down',
+                'arrow-clockwise', 'arrow-counterclockwise', 'arrow-repeat', 'arrow-return-left',
+                'arrow-down-circle-fill', 'arrow-up-short',
+                'chevron-left', 'chevron-right', 'chevron-up', 'chevron-down',
+                'chevron-double-left', 'chevron-double-right',
+                'chevron-compact-left', 'chevron-compact-right',
+                'box-arrow-up-right', 'box-arrow-in-right', 'box-arrow-left',
+                'caret-left', 'caret-right', 'caret-up', 'caret-down',
+                'caret-left-fill', 'caret-right-fill', 'caret-up-fill', 'caret-down-fill',
+                'arrows-move', 'arrows-fullscreen', 'arrows-angle-expand', 'arrows-angle-contract',
+                'signpost', 'signpost-2', 'signpost-fill', 'signpost-2-fill'
+            ],
+            files: [
+                'file-earmark', 'file-earmark-fill', 'file-earmark-text', 'file-earmark-text-fill',
+                'file-earmark-pdf', 'file-earmark-pdf-fill',
+                'file-earmark-spreadsheet', 'file-earmark-spreadsheet-fill',
+                'file-earmark-word', 'file-earmark-word-fill',
+                'file-earmark-ppt', 'file-earmark-ppt-fill',
+                'file-earmark-image', 'file-earmark-image-fill',
+                'file-earmark-code', 'file-earmark-code-fill',
+                'file-earmark-zip', 'file-earmark-zip-fill',
+                'file-earmark-music', 'file-earmark-music-fill',
+                'file-earmark-play', 'file-earmark-play-fill',
+                'file-earmark-medical', 'file-earmark-medical-fill',
+                'file-earmark-plus', 'file-earmark-minus', 'file-earmark-check',
+                'file-earmark-x', 'file-earmark-lock', 'file-earmark-lock-fill',
+                'folder', 'folder-fill', 'folder2', 'folder2-open',
+                'folder-plus', 'folder-minus', 'folder-check', 'folder-x',
+                'folder-symlink', 'folder-symlink-fill',
+                'files', 'files-alt', 'file-richtext', 'file-richtext-fill',
+                'archive', 'archive-fill'
+            ],
+            communication: [
+                'chat', 'chat-fill', 'chat-dots', 'chat-dots-fill',
+                'chat-left', 'chat-left-fill', 'chat-left-text', 'chat-left-text-fill',
+                'chat-right', 'chat-right-fill', 'chat-right-text', 'chat-right-text-fill',
+                'chat-square', 'chat-square-fill', 'chat-square-text', 'chat-square-text-fill',
+                'envelope', 'envelope-fill', 'envelope-open', 'envelope-open-fill',
+                'envelope-at', 'envelope-at-fill', 'envelope-check', 'envelope-check-fill',
+                'envelope-exclamation', 'envelope-exclamation-fill',
+                'envelope-paper', 'envelope-paper-fill',
+                'send', 'send-fill', 'reply', 'reply-fill', 'reply-all', 'reply-all-fill',
+                'telephone', 'telephone-fill', 'telephone-inbound', 'telephone-outbound',
+                'telephone-forward', 'telephone-x',
+                'megaphone', 'megaphone-fill', 'broadcast', 'broadcast-pin',
+                'bell', 'bell-fill', 'bell-slash', 'bell-slash-fill'
+            ],
+            system: [
+                'house', 'house-fill', 'house-door', 'house-door-fill',
+                'gear', 'gear-fill', 'gear-wide', 'gear-wide-connected', 'sliders', 'sliders2',
+                'search', 'search-heart', 'zoom-in', 'zoom-out',
+                'plus', 'plus-lg', 'plus-circle', 'plus-circle-fill', 'plus-square', 'plus-square-fill',
+                'dash', 'dash-lg', 'dash-circle', 'dash-circle-fill', 'dash-square', 'dash-square-fill',
+                'x', 'x-lg', 'x-circle', 'x-circle-fill', 'x-square', 'x-square-fill',
+                'check', 'check-lg', 'check-circle', 'check-circle-fill', 'check-square', 'check-square-fill', 'check-all',
+                'grid', 'grid-fill', 'grid-3x3', 'grid-3x3-gap', 'grid-3x3-gap-fill',
+                'list', 'list-ul', 'list-ol', 'list-task', 'list-check',
+                'three-dots', 'three-dots-vertical',
+                'calendar', 'calendar2', 'calendar3', 'calendar-fill',
+                'calendar-check', 'calendar-check-fill',
+                'calendar-date', 'calendar-date-fill', 'calendar-event', 'calendar-event-fill',
+                'calendar-plus', 'calendar-plus-fill', 'calendar-minus', 'calendar-minus-fill',
+                'calendar-week', 'calendar-week-fill', 'calendar-range', 'calendar-range-fill',
+                'clock', 'clock-fill', 'clock-history', 'alarm', 'alarm-fill',
+                'stopwatch', 'stopwatch-fill', 'hourglass', 'hourglass-split',
+                'trash', 'trash-fill', 'trash2', 'trash2-fill', 'trash3', 'trash3-fill',
+                'pencil', 'pencil-fill', 'pencil-square', 'pen', 'pen-fill',
+                'eraser', 'eraser-fill',
+                'clipboard', 'clipboard-fill', 'clipboard2', 'clipboard2-fill',
+                'bookmark', 'bookmark-fill', 'bookmarks', 'bookmarks-fill',
+                'star', 'star-fill', 'star-half',
+                'pin', 'pin-fill', 'pin-angle', 'pin-angle-fill',
+                'link', 'link-45deg', 'paperclip',
+                'filter', 'filter-circle', 'filter-circle-fill', 'funnel', 'funnel-fill',
+                'sort-down', 'sort-up', 'sort-alpha-down', 'sort-alpha-up',
+                'sort-numeric-down', 'sort-numeric-up',
+                'download', 'upload', 'cloud-download', 'cloud-upload',
+                'box-arrow-up', 'box-arrow-down',
+                'power', 'toggles', 'toggles2',
+                'moon-stars', 'moon-stars-fill', 'sun', 'sun-fill', 'brightness-high', 'brightness-high-fill',
+                'globe', 'globe2', 'translate', 'flag', 'flag-fill',
+                'tag', 'tag-fill', 'tags', 'tags-fill',
+                'qr-code', 'qr-code-scan', 'upc-scan'
+            ],
+            data: [
+                'bar-chart', 'bar-chart-fill', 'bar-chart-line', 'bar-chart-line-fill',
+                'bar-chart-steps',
+                'graph-up', 'graph-up-arrow', 'graph-down', 'graph-down-arrow',
+                'pie-chart', 'pie-chart-fill',
+                'speedometer', 'speedometer2',
+                'table', 'layout-text-sidebar',
+                'database', 'database-fill', 'database-add', 'database-check', 'database-x',
+                'server', 'hdd', 'hdd-fill', 'hdd-stack', 'hdd-stack-fill',
+                'hdd-network', 'hdd-network-fill',
+                'diagram-2', 'diagram-2-fill', 'diagram-3', 'diagram-3-fill',
+                'kanban', 'kanban-fill',
+                'clipboard-data', 'clipboard-data-fill',
+                'receipt', 'receipt-cutoff',
+                'calculator', 'calculator-fill',
+                'hash', 'percent', 'infinity'
+            ],
+            commerce: [
+                'cart', 'cart-fill', 'cart-plus', 'cart-plus-fill',
+                'cart-check', 'cart-check-fill', 'cart-dash', 'cart-dash-fill',
+                'cart-x', 'cart-x-fill',
+                'bag', 'bag-fill', 'bag-check', 'bag-check-fill',
+                'bag-plus', 'bag-plus-fill', 'bag-dash', 'bag-dash-fill',
+                'bag-x', 'bag-x-fill',
+                'basket', 'basket-fill', 'basket2', 'basket2-fill', 'basket3', 'basket3-fill',
+                'wallet', 'wallet-fill', 'wallet2',
+                'cash', 'cash-coin', 'cash-stack',
+                'currency-dollar', 'currency-rupee', 'currency-euro', 'currency-yen',
+                'credit-card', 'credit-card-fill', 'credit-card-2-front', 'credit-card-2-front-fill',
+                'bank', 'bank2', 'piggy-bank', 'piggy-bank-fill',
+                'coin', 'safe', 'safe-fill', 'safe2', 'safe2-fill',
+                'shop', 'shop-window', 'building', 'building-fill',
+                'buildings', 'buildings-fill'
+            ],
+            media: [
+                'image', 'image-fill', 'images', 'card-image',
+                'camera', 'camera-fill', 'camera-video', 'camera-video-fill',
+                'play', 'play-fill', 'play-circle', 'play-circle-fill',
+                'pause', 'pause-fill', 'pause-circle', 'pause-circle-fill',
+                'stop', 'stop-fill', 'stop-circle', 'stop-circle-fill',
+                'skip-start', 'skip-start-fill', 'skip-end', 'skip-end-fill',
+                'skip-backward', 'skip-backward-fill', 'skip-forward', 'skip-forward-fill',
+                'volume-up', 'volume-up-fill', 'volume-down', 'volume-down-fill',
+                'volume-mute', 'volume-mute-fill', 'volume-off', 'volume-off-fill',
+                'music-note', 'music-note-beamed', 'music-note-list',
+                'mic', 'mic-fill', 'mic-mute', 'mic-mute-fill',
+                'film', 'collection', 'collection-fill', 'collection-play', 'collection-play-fill',
+                'easel', 'easel-fill', 'palette', 'palette-fill',
+                'brush', 'brush-fill', 'paint-bucket', 'eyedropper'
+            ],
+            status: [
+                'check-circle', 'check-circle-fill',
+                'exclamation-circle', 'exclamation-circle-fill',
+                'exclamation-triangle', 'exclamation-triangle-fill',
+                'x-circle', 'x-circle-fill',
+                'info-circle', 'info-circle-fill',
+                'question-circle', 'question-circle-fill',
+                'exclamation-diamond', 'exclamation-diamond-fill',
+                'exclamation-octagon', 'exclamation-octagon-fill',
+                'patch-check', 'patch-check-fill',
+                'patch-exclamation', 'patch-exclamation-fill',
+                'patch-question', 'patch-question-fill',
+                'patch-minus', 'patch-minus-fill',
+                'patch-plus', 'patch-plus-fill',
+                'lightning', 'lightning-fill', 'lightning-charge', 'lightning-charge-fill',
+                'emoji-smile', 'emoji-smile-fill', 'emoji-frown', 'emoji-frown-fill',
+                'emoji-neutral', 'emoji-neutral-fill',
+                'hand-thumbs-up', 'hand-thumbs-up-fill',
+                'hand-thumbs-down', 'hand-thumbs-down-fill'
+            ],
+            devices: [
+                'laptop', 'laptop-fill', 'pc-display', 'pc-display-horizontal',
+                'display', 'display-fill',
+                'phone', 'phone-fill', 'phone-landscape', 'phone-landscape-fill',
+                'tablet', 'tablet-fill', 'tablet-landscape', 'tablet-landscape-fill',
+                'smartwatch', 'watch',
+                'printer', 'printer-fill',
+                'keyboard', 'keyboard-fill', 'mouse', 'mouse-fill', 'mouse2', 'mouse2-fill',
+                'headset', 'headphones',
+                'usb-drive', 'usb-drive-fill', 'usb-plug', 'usb-plug-fill',
+                'wifi', 'wifi-off', 'wifi-1', 'wifi-2',
+                'bluetooth', 'router', 'router-fill',
+                'cpu', 'cpu-fill', 'gpu-card', 'memory',
+                'hdd', 'hdd-fill', 'ssd-fill',
+                'terminal', 'terminal-fill', 'code-slash', 'code-square',
+                'bug', 'bug-fill'
+            ],
+            security: [
+                'shield', 'shield-fill', 'shield-check', 'shield-fill-check',
+                'shield-exclamation', 'shield-fill-exclamation',
+                'shield-x', 'shield-fill-x',
+                'shield-lock', 'shield-lock-fill',
+                'shield-slash', 'shield-slash-fill',
+                'shield-plus', 'shield-fill-plus',
+                'shield-minus', 'shield-fill-minus',
+                'lock', 'lock-fill', 'unlock', 'unlock-fill',
+                'key', 'key-fill',
+                'fingerprint',
+                'incognito',
+                'person-lock', 'file-lock', 'file-lock-fill', 'file-lock2', 'file-lock2-fill',
+                'eye', 'eye-fill', 'eye-slash', 'eye-slash-fill'
+            ],
+            layout: [
+                'layout-text-window', 'layout-text-window-reverse',
+                'layout-text-sidebar', 'layout-text-sidebar-reverse',
+                'layout-sidebar', 'layout-sidebar-reverse', 'layout-sidebar-inset',
+                'layout-split', 'layout-three-columns',
+                'layout-wtf', 'columns', 'columns-gap',
+                'aspect-ratio', 'aspect-ratio-fill',
+                'border-all', 'border-width',
+                'type', 'type-bold', 'type-italic', 'type-underline', 'type-strikethrough',
+                'type-h1', 'type-h2', 'type-h3',
+                'text-left', 'text-center', 'text-right',
+                'text-paragraph', 'text-indent-left', 'text-indent-right',
+                'text-wrap', 'blockquote-left', 'blockquote-right',
+                'scissors', 'clipboard', 'clipboard-fill',
+                'crop', 'fullscreen', 'fullscreen-exit',
+                'arrows-move', 'arrows-fullscreen',
+                'distribute-horizontal', 'distribute-vertical'
+            ]
+        };
+
+        // ===== RENDER ICONS =====
+        function renderIcons() {
+            Object.entries(iconData).forEach(([category, icons]) => {
+                const grid = document.getElementById('grid-' + category);
+                if (!grid) return;
+                grid.innerHTML = icons.map(icon => `
+                    <div class="icon-card" data-name="${icon}" onclick="copyIcon(this, 'bi-${icon}')">
+                        <i class="bi bi-${icon}"></i>
+                        <span class="icon-name">bi-${icon}</span>
+                        <span class="copy-feedback">Copied!</span>
+                    </div>
+                `).join('');
+            });
         }
 
+        // ===== SEARCH =====
+        function filterIcons(query) {
+            const q = query.toLowerCase().trim();
+            document.querySelectorAll('.icon-card').forEach(card => {
+                const name = card.getAttribute('data-name');
+                card.classList.toggle('hidden', q && !name.includes(q));
+            });
+        }
+
+        // ===== COPY =====
         function copyIcon(card, className) {
             const code = `<i class="bi ${className}"></i>`;
             navigator.clipboard.writeText(code).then(() => {
                 card.classList.add('copied');
-                setTimeout(() => card.classList.remove('copied'), 1500);
+                setTimeout(() => card.classList.remove('copied'), 1200);
             });
         }
+
+        // ===== THEME =====
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+        }
+
+        // Init
+        renderIcons();
     </script>
 </body>
 

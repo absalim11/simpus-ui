@@ -270,7 +270,7 @@
             <img src="img/ui-icon.png" style="width: 64px; margin-bottom: 10px;">
             <h3>Simpus OS</h3>
             <p>Version 1.0.0</p>
-            <p>Built with SimpusUI & Vue.js</p>
+            <p>Built with SimpusUI</p>
             <br>
             <p class="text-muted">&copy; 2024 Abworks</p>
           </div>

@@ -2,50 +2,108 @@
 
 A jQuery-based UI component library with a clean, modern design.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![jQuery](https://img.shields.io/badge/jQuery-3.6+-0769AD.svg)
+
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
+![jQuery](https://img.shields.io/badge/jQuery-3.7.1-0769AD.svg)
+![Vue.js](https://img.shields.io/badge/Vue.js-2.7-42b883.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 ## ✨ Features
 
-- 🪟 **Draggable & Resizable Windows** - A flexible windowing system
-- 🎨 **Modern Effects** - Beautiful blur and transparency
-- 🌓 **Light & Dark Mode** - Automatic theme switching
-- 📱 **Responsive Design** - Works on all screen sizes
-- ⚡ **jQuery Powered** - Simple, familiar API
-- 🎯 **Zero Dependencies** - Just jQuery
+- 🪟 **Draggable & Resizable Windows** — Fully functional windowing system
+- 🎨 **Glassmorphism Style** — Frosted glass backdrops, spring animations, vibrancy materials
+- 🌓 **Light & Dark Mode** — Automatic theme switching
+- 📱 **Responsive Design** — Works on all screen sizes
+- ⚡ **jQuery + Vue.js** — Desktop powered by jQuery, component showcase by Vue.js
+- 🧩 **Component Showcase** — Interactive documentation with live previews
+- 🔌 **Dynamic Components** — Input Autocomplete & Dynamic Select with JSON API support
 
 ## 🚀 Quick Start
 
-### Include Files
+### 1. Clone & Serve
+
+```bash
+git clone https://github.com/absalim11/simpus-ui.git
+cd simpus-ui
+python3 simpus-server.py
+# Open http://localhost:8087
+```
+
+### 2. Include Files
 
 ```html
-<!-- CSS -->
-<link rel="stylesheet" href="css/simpus-ui.css">
+<!-- Bootstrap 4.6 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
-<!-- jQuery (required) -->
+<!-- Simpus UI CSS -->
+<link rel="stylesheet" href="styles/simpus.css">
+
+<!-- jQuery + Vue.js -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<!-- Simpus UI Library -->
-<script src="js/simpus-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
 ```
 
-### Basic Structure
+## 📁 Project Structure
+
+```
+simpus-ui/
+├── index.html                  # Main entry point (Simpus OS Desktop)
+├── styles/
+│   └── simpus.css              # Core design system (source of truth)
+├── core/
+│   ├── simpus-ui.js            # jQuery UI plugins (Window, Dock, MenuBar, etc.)
+│   └── routing.js              # SPA routing
+├── app/
+│   ├── desktop/
+│   │   ├── desktop.html        # Desktop template
+│   │   └── controller.js       # Desktop Vue controller
+│   └── components/
+│       ├── index.html          # Component Showcase template
+│       ├── controller.js       # Vue component definitions
+│       └── components.css      # Showcase-specific styles (inherits from simpus.css)
+├── img/                        # Wallpapers & icons
+└── simpus-server.py            # Development server
+```
+
+## 🧩 Component Showcase
+
+The library includes an interactive **Component Showcase** accessible from the desktop:
+
+**Menu Bar** → **Components** → **Showcase Component**
+
+### Available Components
+
+| Component | Description |
+|---|---|
+| **Button** | Primary, Secondary, Destructive, Outline, Ghost, Link variants |
+| **Input** | Text inputs with labels, placeholders, disabled states |
+| **Checkbox** | Custom styled checkboxes |
+| **Radio** | Radio button groups |
+| **Switch** | Toggle switches |
+| **Card** | Content containers with header/footer |
+| **Combobox** | Searchable dropdown with keyboard navigation |
+| **Modal / Dialog** | macOS Tahoe-style frosted glass dialogs |
+| **Alert Dialog** | Informational modal with single action |
+| **Confirm Dialog** | Confirmation modal with Cancel/Confirm actions |
+| **Toast** | Notification popups with glassmorphism |
+| **Skeleton** | Loading placeholders |
+| **Table** | Data tables with hover states |
+| **Tabs** | Tabbed content navigation |
+| **Input Autocomplete** | Live search with JSON API (DummyJSON) |
+| **Dynamic Select** | Searchable select with remote data fetching |
+| **Login Page** | Pre-designed login form example |
+
+### Dynamic Components (API-powered)
 
 ```html
-<div class="simpus-desktop">
-  <!-- Menu Bar -->
-  <div class="simpus-menubar" id="menubar"></div>
-  
-  <!-- Windows Container -->
-  <div id="windows"></div>
-  
-  <!-- Dock -->
-  <div class="simpus-dock" id="dock"></div>
-</div>
+<!-- Autocomplete: fetches from https://dummyjson.com/products/search -->
+<comp-autocomplete></comp-autocomplete>
+
+<!-- Dynamic Select: fetches from https://dummyjson.com/users/search -->
+<comp-dynamic-select></comp-dynamic-select>
 ```
 
-## 📚 Components
+## 🖥️ Desktop Environment (jQuery Plugins)
 
 ### Menu Bar
 
@@ -53,261 +111,123 @@ A jQuery-based UI component library with a clean, modern design.
 $('#menubar').simpusMenuBar({
   items: [
     {
-      id: 'file',
-      label: 'File',
+      id: 'file', label: 'File',
       submenu: [
-        { label: 'New', shortcut: 'Ctrl+N', action: 'new' },
-        { label: 'Open', shortcut: 'Ctrl+O', action: 'open' },
+        { label: 'New', shortcut: '⌘N', action: 'new' },
         { divider: true },
-        { label: 'Save', shortcut: 'Ctrl+S', action: 'save' }
+        { label: 'Save', shortcut: '⌘S', action: 'save' }
       ]
     }
   ],
-  onSelect: function(menu, action) {
-    console.log('Selected:', action);
-  }
-});
-```
-
-### Dock
-
-```javascript
-$('#dock').simpusDock({
-  items: [
-    { 
-      id: 'home', 
-      icon: '<div class="app-icon">🏠</div>',
-      tooltip: 'Home',
-      active: true
-    },
-    { 
-      id: 'settings', 
-      icon: '<div class="app-icon">⚙️</div>',
-      tooltip: 'Settings'
-    }
-  ],
-  onClick: function(appId) {
-    console.log('Launched:', appId);
-  }
+  onSelect: function(menu, action) { console.log(action); }
 });
 ```
 
 ### Window
 
 ```javascript
-$('#window').simpusWindow({
+$('<div></div>').simpusWindow({
   title: 'My Window',
   width: 600,
   height: 400,
   content: '<p>Hello, Simpus!</p>',
-  resizable: true,
-  draggable: true,
-  onClose: function($window) {
-    console.log('Window closed');
-  }
+  resizable: true
 });
 ```
 
 ### Modal
 
 ```javascript
-// Simple modal
 $.simpusModal({
-  title: 'Hello',
-  content: 'This is a modal dialog.',
-  buttons: [
-    { label: 'Cancel', type: 'secondary', action: 'cancel' },
-    { label: 'OK', type: 'primary', action: 'ok' }
-  ],
-  onAction: function(action) {
-    console.log('Action:', action);
-  }
-});
-
-// Alert modal with icon
-$.simpusModal({
-  type: 'success', // 'info', 'warning', 'error', 'success'
-  title: 'Success!',
+  type: 'success',
+  title: 'Saved!',
   content: 'Your changes have been saved.',
-  buttons: [{ label: 'Great!', type: 'primary', action: 'ok' }]
+  buttons: [{ label: 'OK', type: 'primary', action: 'ok' }]
 });
 ```
 
-### Notification
+### Dock, Context Menu, Notification, Finder
 
-```javascript
-$.simpusNotification({
-  title: 'New Message',
-  message: 'You have a new notification.',
-  icon: '💬',
-  duration: 5000,
-  onClick: function() {
-    console.log('Notification clicked');
-  }
-});
+See the full jQuery API in `core/simpus-ui.js`.
+
+## 🎨 Icon System
+
+Simpus OS uses **Bootstrap Icons v1.11.3** with **400+ curated icons** across 12 categories. Full interactive documentation is available at `app/icons/index.html` with search and click-to-copy.
+
+### Usage
+
+```html
+<i class="bi bi-hospital"></i>
+<i class="bi bi-person-badge"></i>
+<i class="bi bi-heart-pulse"></i>
 ```
 
-### Context Menu
+### Categories
 
-```javascript
-$('#element').simpusContextMenu({
-  items: [
-    { label: 'Cut', shortcut: 'Ctrl+X', action: 'cut' },
-    { label: 'Copy', shortcut: 'Ctrl+C', action: 'copy' },
-    { label: 'Paste', shortcut: 'Ctrl+V', action: 'paste' },
-    { divider: true },
-    { label: 'Delete', action: 'delete', disabled: true }
-  ],
-  onSelect: function(action) {
-    console.log('Context action:', action);
-  }
-});
-```
+| Category | Icons | Key Icons |
+|---|---|---|
+| 🏥 **Healthcare** | 40+ | `hospital`, `capsule`, `heart-pulse`, `lungs`, `virus`, `bandaid` |
+| 👥 **People** | 30+ | `person`, `person-badge`, `person-check`, `people`, `person-gear` |
+| 🧭 **Navigation** | 45+ | `arrow-*`, `chevron-*`, `caret-*`, `arrows-move`, `signpost` |
+| 📄 **Files** | 45+ | `file-earmark-*`, `folder-*`, `archive`, `files` |
+| 💬 **Communication** | 45+ | `chat-*`, `envelope-*`, `send`, `telephone-*`, `bell-*` |
+| ⚙️ **System** | 100+ | `house`, `gear`, `search`, `calendar-*`, `clock-*`, `trash-*` |
+| 📊 **Data** | 30+ | `bar-chart-*`, `graph-*`, `pie-chart`, `database-*`, `table` |
+| 💰 **Commerce** | 45+ | `cart-*`, `bag-*`, `wallet`, `credit-card-*`, `bank`, `building` |
+| 🎬 **Media** | 45+ | `image`, `camera-*`, `play-*`, `volume-*`, `music-*`, `mic-*` |
+| ⚠️ **Status** | 35+ | `check-circle`, `exclamation-*`, `info-circle`, `patch-*` |
+| 💻 **Devices** | 40+ | `laptop`, `phone`, `printer`, `wifi`, `cpu`, `terminal`, `bug` |
+| 🔒 **Security** | 28+ | `shield-*`, `lock-*`, `key`, `fingerprint`, `incognito` |
+| 📐 **Layout** | 35+ | `layout-*`, `columns`, `type-*`, `text-*`, `fullscreen` |
 
-### Tooltip
+### Icon Documentation Page
 
-```javascript
-$('#button').simpusTooltip({
-  content: 'Click me!',
-  position: 'top', // 'top', 'bottom', 'left', 'right'
-  delay: 300
-});
-```
+Open via **Menu Bar** → **Components** → or directly at `app/icons/index.html`.
+Features: search filter, dark mode toggle, click-to-copy HTML.
 
-### Switch/Toggle
+## 🎨 Design System
 
-```javascript
-$('#switch').simpusSwitch({
-  checked: true,
-  onChange: function(isChecked) {
-    console.log('Switch:', isChecked);
-  }
-});
-
-// API
-$('#switch').data('simpusSwitch').toggle();
-$('#switch').data('simpusSwitch').setChecked(true);
-```
-
-### Segmented Control
-
-```javascript
-$('#segmented').simpusSegmented({
-  items: ['Day', 'Week', 'Month'],
-  selected: 0,
-  onChange: function(index, value) {
-    console.log('Selected:', value);
-  }
-});
-```
-
-### Finder/File Browser
-
-```javascript
-$('#finder').simpusFinder({
-  sidebar: [
-    {
-      title: 'Favorites',
-      items: [
-        { label: 'Desktop', path: '/desktop', icon: '🖥️' },
-        { label: 'Documents', path: '/docs', icon: '📄' }
-      ]
-    }
-  ],
-  files: [
-    { name: 'file.txt', icon: '📄' },
-    { name: 'image.jpg', icon: '🖼️' }
-  ],
-  onFileClick: function(filename) {
-    console.log('Clicked:', filename);
-  }
-});
-```
-
-### Desktop Icons
-
-```javascript
-$('#desktop').simpusDesktopIcons({
-  icons: [
-    { id: 'disk', label: 'Hard Drive', icon: '💿' },
-    { id: 'docs', label: 'Documents', icon: '📁' }
-  ],
-  onDoubleClick: function(iconId) {
-    console.log('Opened:', iconId);
-  }
-});
-```
-
-## 🎨 Theming
-
-### Switch Theme
-
-```javascript
-// Toggle between light and dark
-SimpusUI.toggleTheme();
-
-// Set specific theme
-SimpusUI.setTheme('dark');
-SimpusUI.setTheme('light');
-```
-
-### CSS Variables
-
-Customize the look by overriding CSS variables:
+All styles are driven by CSS variables defined in `styles/simpus.css`:
 
 ```css
 :root {
+  /* Colors */
   --simpus-accent-primary: #16a085;
-  --simpus-window-radius: 8px;
+  --simpus-accent-secondary: #2980b9;
+  --simpus-accent-red: #c0392b;
+
+  /* Buttons */
+  --simpus-btn-height: 32px;
+  --simpus-btn-padding: 0 16px;
+  --simpus-btn-radius: 8px;
+
+  /* Inputs */
+  --simpus-input-radius: 8px;
+  --simpus-input-border: #bdc3c7;
+
+  /* Windows */
+  --simpus-window-radius: 12px;
   --simpus-glass-blur: 20px;
+
+  /* Z-Index Scale */
+  --simpus-z-dock: 1000;
+  --simpus-z-menubar: 1001;
+  --simpus-z-modal: 2000;
+  --simpus-z-tooltip: 3000;
 }
 ```
 
-## 📦 Available CSS Variables
-
-### Colors
-- `--simpus-bg-primary`, `--simpus-bg-secondary`, `--simpus-bg-tertiary`
-- `--simpus-text-primary`, `--simpus-text-secondary`, `--simpus-text-tertiary`
-- `--simpus-accent-primary`, `--simpus-accent-secondary`, etc.
-
-### Components
-- `--simpus-menubar-height`, `--simpus-menubar-bg`
-- `--simpus-window-radius`, `--simpus-window-bg`, `--simpus-window-shadow`
-- `--simpus-dock-height`, `--simpus-dock-bg`
-- `--simpus-btn-radius`, `--simpus-btn-primary-bg`
-- `--simpus-input-radius`, `--simpus-input-bg`
-
-### Effects
-- `--simpus-glass-light`, `--simpus-glass-dark`
-- `--simpus-glass-blur`, `--simpus-glass-saturation`
-- `--simpus-shadow-sm`, `--simpus-shadow-md`, `--simpus-shadow-lg`
-
-## 🔧 API Reference
-
-### Global Methods
-
-| Method | Description |
-|--------|-------------|
-| `SimpusUI.init()` | Initialize the library |
-| `SimpusUI.setTheme(theme)` | Set theme ('light' or 'dark') |
-| `SimpusUI.toggleTheme()` | Toggle between light/dark |
-| `SimpusUI.focusWindow($window)` | Bring window to front |
-| `SimpusUI.generateId(prefix)` | Generate unique ID |
-
-### Window API
+### Theme Switching
 
 ```javascript
-const $window = $('#window');
-
-// Methods via data attribute
-$window.data('simpusWindow').setTitle('New Title');
-$window.data('simpusWindow').setContent('<p>New content</p>');
-$window.data('simpusWindow').minimize();
-$window.data('simpusWindow').maximize();
-$window.data('simpusWindow').restore();
-$window.data('simpusWindow').close();
-$window.data('simpusWindow').focus();
+SimpusUI.setTheme('dark');
+SimpusUI.toggleTheme();
 ```
+
+## 📋 Changelog
+
+### v1.0.0
+- Initial release with desktop environment, windowing system, dock, menu bar
 
 ## 🌐 Browser Support
 
@@ -318,52 +238,8 @@ $window.data('simpusWindow').focus();
 
 ## 📄 License
 
-MIT License - feel free to use in personal and commercial projects.
+MIT License — free for personal and commercial use.
 
 ---
 
-
-## 🌟 Component Showcase
-
-The library includes a comprehensive **Component Showcase** that demonstrates all available UI elements. 
-
-To view it:
-1. Open the Menu Bar > **Components** > **Open Component Showcase**.
-2. Or click the **Settings** icon in the Dock.
-
-### New Components (v1.1)
-
-#### 🦴 Skeleton Loader
-Animated placeholders for content loading states.
-```html
-<div class="simpus-animate-pulse">
-  <div class="simpus-skeleton text" style="width: 70%;"></div>
-</div>
-```
-
-#### 🔍 Autocomplete
-Input field with dropdown suggestions.
-```javascript
-$('#input').simpusAutocomplete({
-  source: ['Apple', 'Banana', 'Cherry']
-});
-```
-
-#### 📂 Finder (File Manager)
-A macOS-style file browser with sidebar navigation and icon grid view.
-```javascript
-$('#finder').simpusFinder({
-  sidebar: [...],
-  files: [...]
-});
-```
-
-#### 🔐 Login Window
-A pre-designed, centered login modal template.
-```javascript
-createLoginWindow();
-```
-
----
-
-Made with ❤️ for the web development community.
+Made with ❤️ by Simpus UI Team.
