@@ -25,6 +25,13 @@
 		cache: false,
 	};
 
+	// Components Showcase Module
+	routes['/components'] = {
+		url: '#/components',
+		templateUrl: 'app/components/index.html?v=' + Math.random(),
+		cache: false
+	};
+
 	$.router.setData(routes).setDefault(defaultRoute);
 
 	$.when($.ready).then(function () {

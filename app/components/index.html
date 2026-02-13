@@ -1,0 +1,43 @@
+<div id="components-app">
+    <!-- Sidebar -->
+    <div class="components-sidebar">
+        <div class="mb-4">
+            <h4 style="font-weight: 700;">Simpus UI</h4>
+            <span style="font-size: 0.8rem; color: #64748b;">Based on Basecoat UI</span>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Getting Started</div>
+            <!-- <a class="nav-link" :class="{ active: currentView === 'introduction' }" @click="currentView = 'introduction'">Introduction</a> -->
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Components</div>
+            <a v-for="item in menuItems" :key="item.id" class="nav-link" :class="{ active: currentView === item.id }"
+                @click="currentView = item.id">
+                {{ item.label }}
+            </a>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Pages</div>
+            <a class="nav-link" :class="{ active: currentView === 'login-page' }"
+                @click="currentView = 'login-page'">Login Page</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="components-content">
+        <div v-if="currentView === 'introduction'">
+            <h1>Introduction</h1>
+            <p>Welcome to the Simpus UI Component library. This collection is designed to replicate the clean,
+                accessible aesthetic of Basecoat UI using Vue.js.</p>
+        </div>
+
+        <!-- Dynamic Component View -->
+        <component :is="currentViewComponent" v-else></component>
+    </div>
+</div>
+
+<link rel="stylesheet" href="app/components/components.css">
+<script src="app/components/controller.js"></script>

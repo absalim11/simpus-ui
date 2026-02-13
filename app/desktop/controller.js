@@ -18,7 +18,7 @@
           items: [
             {
               id: 'logo', label: this.simpusLogo, submenu: [
-                { label: 'About macOS Web', action: 'about' }
+                { label: 'About Simpus OS', action: 'about' }
               ]
             },
             {
@@ -246,7 +246,7 @@
       },
 
       createWelcomeWindow: function () {
-        this.createNewWindow('Welcome to macOS Web');
+        this.createNewWindow('Welcome to Simpus OS');
       },
 
       changeWallpaper: function () {
@@ -255,39 +255,20 @@
       },
 
       createComponentsWindow: function () {
-        const content = `
-          <div style="padding: 20px;">
-            <h3>Component Showcase</h3>
-            <p>Welcome to Simpus UI components demonstration.</p>
-            <hr>
-            <h4>Buttons</h4>
-            <button class="simpus-btn simpus-btn-primary">Primary</button>
-            <button class="simpus-btn simpus-btn-secondary">Secondary</button>
-            <br><br>
-            <h4>Inputs</h4>
-            <input type="text" class="simpus-input" placeholder="Type something...">
-            <br><br>
-            <h4>Switch</h4>
-            <div id="demo-switch"></div>
-          </div>
-        `;
-
-        const $window = $('<div></div>').simpusWindow({
+        $('<div></div>').simpusWindow({
           title: 'Component Showcase',
-          width: 500,
-          height: 400,
-          content: content
+          width: 1000,
+          height: 700,
+          content: '<iframe src="index.html#/components" style="width:100%; height:100%; border:none;"></iframe>',
+          maximizable: true
         }).appendTo('#windows-container');
-
-        // Initialize components inside the window
-        $window.find('#demo-switch').simpusSwitch({ checked: true });
       },
 
       showAboutWindow: function () {
         const content = `
           <div style="text-align: center; padding: 20px;">
             <img src="img/ui-icon.png" style="width: 64px; margin-bottom: 10px;">
-            <h3>macOS Web</h3>
+            <h3>Simpus OS</h3>
             <p>Version 1.0.0</p>
             <p>Built with SimpusUI & Vue.js</p>
             <br>
@@ -295,7 +276,7 @@
           </div>
         `;
         $('<div></div>').simpusWindow({
-          title: 'About macOS Web',
+          title: 'About Simpus OS',
           width: 300,
           height: 250,
           content: content,
