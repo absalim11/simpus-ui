@@ -18,7 +18,18 @@ A jQuery-based UI component library with a clean, modern design.
 - 🧩 **Component Showcase** — Interactive documentation with live previews
 - 🔌 **Dynamic Components** — Input Autocomplete & Dynamic Select with JSON API support
 
-## 🚀 Quick Start
+## � Screenshots
+
+### Desktop with About Page
+![Desktop with About Page](img/screenshots/desktop-about.png)
+
+### Desktop with Finder
+![Desktop with Finder](img/screenshots/desktop-finder.png)
+
+### Desktop with Component Showcase
+![Desktop with Component Showcase](img/screenshots/desktop-components.png)
+
+## �🚀 Quick Start
 
 ### 1. Clone & Serve
 
